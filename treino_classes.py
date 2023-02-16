@@ -5,7 +5,7 @@ class Conta:
         self.__titular = titular # O __ é um aviso para o desenvolvedor saber que nao deve manusear o atributo fora da classe
         self.__saldo = saldo # O __ é um aviso para o desenvolvedor saber que nao deve manusear o atributo fora da classe
         self.__limite = limite # O __ é um aviso para o desenvolvedor saber que nao deve manusear o atributo fora da classe
-        self.__codigo_banco = '001'
+
 
     def extrato(self):
         print(f'O Saldo da sua conta é:"{self.saldo} {self.titular}')
@@ -69,9 +69,23 @@ class Conta:
         # executa o comando como se estivesse acessando o atributo porém esta usando o metodo
         # definir primeiro o getter depois o setter
 
-    @property
-    def codigo_banco(self):
-        return self.__codigo_banco
+    @staticmethod # metodo que nao aponta para uma referencia, pertence a classe
+    def codigo_banco():
+        return '001'
+    # atentar a coesa do paradigma orientado a objeto, o natural é sempre haver o objeto
+    # manter coesao do codigo e paradigma ao ussar @staticmethod
+    #@staticmethod aproxima o codigo do mundo procedural
+
+    @staticmethod
+    def todos_codig_banco():
+        return {'BB':'001', 'itau':'002','caixa':'003'}
+    #atentar a coesa do paradigma orientado a objeto, o natural é sempre haver o objeto
+    # manter coesao do codigo e paradigma ao ussar @staticmethod
+    # @staticmethod aproxima o codigo do mundo procedural
+
+
+
+
 
 
 
