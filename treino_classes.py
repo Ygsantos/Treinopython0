@@ -1,5 +1,5 @@
 class Conta:
-    def __init__(self,numero,titular, saldo, limite):
+    def __init__(self,numero,titular, saldo,limite):
         print(f'construindo objeto {self}')
         self.__numero = numero # O __ é um aviso para o desenvolvedor saber que nao deve manusear o atributo fora da classe
         self.__titular = titular # O __ é um aviso para o desenvolvedor saber que nao deve manusear o atributo fora da classe
@@ -21,7 +21,7 @@ class Conta:
             self.saldo -= valor
         else:
             print(f'O seu valor {valor} passou o limite permitido')
-
+    '''
     def get_saldo(self):    #retornar o valor do atributo
         return self.__saldo #atributo sendo manipulado dentro da classe.
 
@@ -33,18 +33,27 @@ class Conta:
 
     def get__numero(self): #retornar o valor do atributo
         return self.__numero #atributo sendo manipulado dentro da classe.
+'''
+    @property
+    def saldo(self):
+        return self.__saldo
 
-    '''  @property
-    def limite(self):   # Deixar o get mais amigavel com o desenvolvedor
-        return self.__limite '''
-        #getters
-        #executa o comando como se estivesse acessando o atributo porém esta usando o metodo
-    ''' @limite.setter
-    def limite(self,limite): #deixar o set mais amigavel com o desenvolvedor
-        self.__limite = limite '''
-        #setters
+    @property
+    def titular(self):
+        return self.__titular
+
+    @property
+    def limite(self):  # Deixar o get mais amigavel com o desenvolvedor
+        return self.__limite
+        # getters
         # executa o comando como se estivesse acessando o atributo porém esta usando o metodo
 
+    @limite.setter
+    def limite(self, limite):  # deixar o set mais amigavel com o desenvolvedor
+        self.__limite = limite
+        # setters
+        # executa o comando como se estivesse acessando o atributo porém esta usando o metodo
+        # definir primeiro o getter depois o setter
     def transfere(self, valor, destino): #(Self,valor,origem, destino). Elimina a origem e mantem somente self e destino com o valor. evita redundancia
         self.saca(valor) # eliminando a origem mantem apenas o self pois vai apontar para a conta de origem que esta usando o metodo.
         destino.deposita(valor) # destino executando o metodo deposita com o valor
