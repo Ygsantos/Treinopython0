@@ -1,10 +1,10 @@
 class Programa:
     def __init__(self,nome,ano):
-        self._nome = nome.titles() #remover o __ duplo e deixar o unico para evitar
+        self._nome = nome.title() #remover o __ duplo e deixar o unico para evitar
         self.ano = ano             #erro ao chamar a funcao relacionada ao atributo.
         self._likes = 0
 
-    def dar_like(self):
+    def dar_likes(self):
         self._likes += 1
 
     @property
@@ -28,7 +28,7 @@ class Filme(Programa): #Classe agora tem uma classe mae, a mesma herdou os metod
         super().__init__(nome,ano)#Chamar a classe mae atraves do inicializador.
         self.duracao = duracao    # reduziu a quantidade de codigo repetitivo com a heranca.
 
-    def __str__(self):
+    def __str__(self): #Representa o objeto daquela classe textualmente, nao sera necessario imprimir com o if.
         return f'Nome: {self.nome} - {self.duracao} min - Likes: {self.likes}'
 
 class Serie(Programa): #Classe agora tem uma classe mae, a mesma herdou os metodos de Programa.
@@ -38,11 +38,11 @@ class Serie(Programa): #Classe agora tem uma classe mae, a mesma herdou os metod
         super().__init__(nome,ano) #Chamar a classe mae atraves do inicializador. ''Super' chama o metodo da classe mae.
         self.temporadas = temporadas # reduziu a quantidade de codigo repetitivo com a heranca.
 
-    def __str__(self):
+    def __str__(self): #Representa o objeto daquela classe textualmente, nao sera necessario imprimir com o if.
         return f'Nome: {self.nome} - {self.temporadas} temporadas - Likes: {self.likes}'
 
-class Playlist():
-    def __init__(self, nome, programas):
+class Playlist(): #Criando classe playlist
+    def __init__(self, nome, programas): #Recebe como parametro o nome da playlist e os programas da playlist.
         self.nome = nome
         self._programas = programas
 
