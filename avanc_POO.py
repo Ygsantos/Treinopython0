@@ -1,56 +1,83 @@
-class Filme:
+class Programa:
+    def __init__(self,nome,ano):
+        self._nome = nome.titles() #remover o __ duplo e deixar o unico para evitar
+        self.ano = ano             #erro ao chamar a funcao relacionada ao atributo.
+        self._likes = 0
+
+    def dar_like(self):
+        self._likes += 1
+
+    @property
+    def likes(self):
+        return self._likes
+
+    @property
+    def nome(self):
+        return self._nome
+
+    @nome.setter
+    def nome(self, novo_nome):
+        self._nome = novo_nome.title()
+
+    def __str__(self): #Representa o objeto daquela classe textualmente, nao sera necessario imprimir com o if.
+        return f'Nome: {self.nome} Likes: {self.likes}'
+class Filme(Programa): #Classe agora tem uma classe mae, a mesma herdou os metodos de Programa.
+                       #Passar como parametro a classe mae.
+                       #python suporta heranca de mais de uma classe.
     def __init__(self,nome, ano, duracao):
-        self.__nome = nome.title()
-        self.ano = ano
-        self.duracao = duracao
-        self.__likes = 0
+        super().__init__(nome,ano)#Chamar a classe mae atraves do inicializador.
+        self.duracao = duracao    # reduziu a quantidade de codigo repetitivo com a heranca.
 
-    def dar_like(self):
-        self.likes += 1
+    def __str__(self):
+        return f'Nome: {self.nome} - {self.duracao} min - Likes: {self.likes}'
 
-    @property
-    def likes(self):
-        return self.__likes
-
-    @property
-    def nome(self):
-        return self.__nome
-
-    @nome.setter
-    def nome(self,novo_nome):
-        self.__nome = novo_nome.title()
-
-
-class Serie:
+class Serie(Programa): #Classe agora tem uma classe mae, a mesma herdou os metodos de Programa.
+                       #Passar como parametro a classe mae.
+                       # python suporta heranca de mais de uma classe.
     def __init__(self,nome, ano, temporadas):
-        self.__nome = nome.title()
-        self.ano = ano
-        self.temporadas = temporadas
-        self.__likes = 0
+        super().__init__(nome,ano) #Chamar a classe mae atraves do inicializador. ''Super' chama o metodo da classe mae.
+        self.temporadas = temporadas # reduziu a quantidade de codigo repetitivo com a heranca.
 
-    def dar_like(self):
-        self.likes+=1
+    def __str__(self):
+        return f'Nome: {self.nome} - {self.temporadas} temporadas - Likes: {self.likes}'
+
+class Playlist():
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
 
     @property
-    def likes(self):
-        return self.__likes
+    def listagem(self):
+        return self._programas
 
     @property
-    def nome(self):
-        return self.__nome
+    def tamanho(self):
+        return len(self._programas)
 
-    @nome.setter
-    def nome(self,novo_nome):
-        self.__nome = novo_nome.title()
+vingadores = Filme('vingadores - guerra infinita', 2018, 160)
+atlanta = Serie('atlanta', 2018, 2)
+tmep = Filme('todo mundo em panico', 1999, 100)
+demolidor = Serie('demolidor', 2016, 2)
+
+vingadores.dar_likes()
+vingadores.dar_likes()
+vingadores.dar_likes()
+atlanta.dar_likes()
+atlanta.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+demolidor.dar_likes()
+demolidor.dar_likes()
+
+listinha = [atlanta, vingadores, demolidor, tmep]
+minha_playlist = Playlist('fim de semana', listinha)
+
+for programa in minha_playlist.listagem:
+    print(programa)
+
+print(f'Tamanho: {len(minha_playlist.listagem)}')
 
 
+#Polimorfismo, como sao do mesmo supertipo consgue acessar as duas.
 
-
-vingadores = Filme('Vingadores',2022, 160)
-print(f'Nome: {vingadores.nome}, Ano: {vingadores.ano}, duracao: {vingadores.duracao}, Likes: {vingadores.likes}')
-
-
-
-
-invencivel = Serie('invencivel',2022,1)
-print(f'Nome:{invencivel.nome}, Ano:{invencivel.ano}, Temporadas:{invencivel.temporadas}, Likes: {invencivel.likes}')
+#hasatrr(parametros, item a procurar)
